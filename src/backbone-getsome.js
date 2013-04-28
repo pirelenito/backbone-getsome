@@ -20,9 +20,10 @@
         var values = getValues(model, attributes);
         var result = valueFunction.apply(model, values);
 
-        model.set(name, result);
+        model.set(name, result, { fromGetSome: true });
       }
 
+      model.on('change:' + name, preventSet);
       model.on(getEventNames(attributes), update);
       update();
     });
@@ -38,6 +39,10 @@
     return _(attributes).map(function (attribute) {
       return model.get(attribute);
     });
+  }
+
+  function preventSet (_, _, options) {
+    if (!options.fromGetSome) { throw "can't set a dynamic attribute"; }
   }
 
 })(Backbone);

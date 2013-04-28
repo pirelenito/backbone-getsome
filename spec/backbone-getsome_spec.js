@@ -17,4 +17,12 @@ describe("Backbone GetSome", function() {
 
     expect(model.get('fullName')).toEqual('Paulo Ragonha');
   });
+
+  it("should prevent setting on a dynamic attribute", function() {
+    var model = new MyModel();
+
+    expect(function () {
+      model.set('fullName', 'Paulo Ragonha');
+    }).toThrow("can't set a dynamic attribute");
+  });
 });
