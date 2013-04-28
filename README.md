@@ -35,4 +35,11 @@ model.on('change:fullName', function () {
 model.set('firstName', 'Pedro');
 ```
 
+## Know drawbacks ##
+
+* Setting a dependent attribute of a dynamic attribute with `{silent: true}` breaks the update;
+* Since it sets the dynamic attribute as a regular Model attribute, it gets sent to persintency.
+
+## Notes ##
+
 This is a Work in Progress. **Not ready for production**.
